@@ -1,6 +1,7 @@
 // Copyright 2020-2021 the AloeDB authors. All rights reserved. MIT license.
 
-import { isUndefined, getPathDirname } from './utils.ts';
+import { isUndefined } from './utils.ts';
+import { dirname } from "https://deno.land/std@0.126.0/path/mod.ts";
 
 /**
  * Database storage file reader.
@@ -84,8 +85,7 @@ async function ensureFile(path: string, data: string = ''): Promise<void> {
 		if (!info.isFile) throw new Error('Invalid file specified');
 	} catch (error) {
 		if (error instanceof Deno.errors.NotFound) {
-			const dirname: string = getPathDirname(path);
-			await ensureDir(dirname);
+			await ensureDir(dirname(path));
 			await Deno.writeTextFile(path, data);
 			return;
 		}
@@ -106,8 +106,7 @@ function ensureFileSync(path: string, data: string = ''): void {
 		if (!info.isFile) throw new Error('Invalid file specified');
 	} catch (error) {
 		if (error instanceof Deno.errors.NotFound) {
-			const dirname: string = getPathDirname(path);
-			ensureDirSync(dirname);
+			ensureDirSync(dirname(path));
 			Deno.writeTextFileSync(path, data);
 			return;
 		}

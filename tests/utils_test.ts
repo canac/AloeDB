@@ -6,8 +6,6 @@ import {
 	numbersList,
 	isObjectEmpty,
 	getObjectLength,
-	getPathFilename,
-	getPathDirname,
 	deepClone,
 	deepCompare,
 	prepareArray,
@@ -47,24 +45,6 @@ Deno.test(`${green('[utils.ts]')} getObjectLength`, () => {
 	assertEquals(getObjectLength({}), 0);
 	assertEquals(getObjectLength({ key: undefined }), 1);
 	assertEquals(getObjectLength({ test1: 1, test2: 2, test3: 3 }), 3);
-});
-
-Deno.test(`${green('[utils.ts]')} getPathFilename`, () => {
-	assertEquals(getPathFilename('foo.json'), 'foo.json');
-	assertEquals(getPathFilename('./foo/bar.json'), 'bar.json');
-	assertEquals(getPathFilename('foo/bar/baz.json'), 'baz.json');
-	assertEquals(getPathFilename('/foo/bar.json'), 'bar.json');
-	assertEquals(getPathFilename('//foo//bar.json'), 'bar.json');
-	assertEquals(getPathFilename('\\foo\\bar.json'), 'bar.json');
-});
-
-Deno.test(`${green('[utils.ts]')} getPathDirname`, () => {
-	assertEquals(getPathDirname('foo.json'), '');
-	assertEquals(getPathDirname('./foo/bar.json'), './foo');
-	assertEquals(getPathDirname('foo/bar/baz.json'), 'foo/bar');
-	assertEquals(getPathDirname('/foo/bar.json'), 'foo');
-	assertEquals(getPathDirname('//foo//bar.json'), 'foo');
-	assertEquals(getPathDirname('\\foo\\bar.json'), 'foo');
 });
 
 Deno.test(`${green('[utils.ts]')} deepClone (Primitives)`, () => {

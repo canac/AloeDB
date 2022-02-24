@@ -49,33 +49,6 @@ export function getObjectLength(target: PlainObject): number {
 }
 
 /**
- * Get filename from the path.
- * @param path Path to the file.
- * @returns Filename from the path.
- */
-export function getPathFilename(path: string): string {
-	const parsed: string[] = path.split(/[\\\/]/);
-	const filename: string | undefined = parsed.pop();
-
-	return filename ? filename : '';
-}
-
-/**
- * Get dirname from the path.
- * @param path Path to the file.
- * @returns Dirname from the path.
- */
-export function getPathDirname(path: string): string {
-	let parsed: string[] = path.split(/[\\\/]/);
-	parsed = parsed.map(value => value.trim());
-	parsed = parsed.filter(value => value !== '');
-	parsed.pop();
-
-	const dirname: string = parsed.join('/');
-	return dirname;
-}
-
-/**
  * Deep clone for objects and arrays. Can also be used for primitives.
  * @param target Target to clone.
  * @return Clone of the target.
@@ -193,7 +166,7 @@ export function prepareArray(target: unknown[]): void {
  * @param target Target to check.
  * @returns Result of checking.
  */
- export function isPrimitive(target: unknown): target is DocumentPrimitive {
+export function isPrimitive(target: unknown): target is DocumentPrimitive {
 	const type = typeof target;
 	return type === 'string' || type === 'number' || type === 'boolean' || target === null;
 }
